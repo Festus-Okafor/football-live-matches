@@ -1,24 +1,33 @@
 
 
+apikey = '8f8a1af5271e2dc962bf6d6077cf90e3';
+url = 'https://gnews.io/api/v4/search?q=example&lang=en&country=us&max=10&apikey=' + apikey;
 
- const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': 'YOUR_API_KEY_HERE', // 🔑 Replace with your API key
-      'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+
+fetch(url)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    articles = data.articles;
+     console.log(articles)
+    for (i = 0; i < articles.length; i++) {
+      // for articles, we got articles[i].title
+      console.log("Title: " + articles[i]['title']);
+      //for description, we got articles[i].description
+      console.log("Description: " + articles[i]['description']);
+
+      // You can replace {property} below with any of the article properties returned by the API.
+      // articles[i].{property}
+      // console.log(articles[i]['{property}']);
+
+      break;
     }
-  };
-
-  fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all', options)
-    .then(response => response.json())
-    .then(data => {
-      const matchesContainer = document.getElementById('matches');
-      const matches = data.response;
-
-      if (matches.length === 0) {
+  });
+    /*   if (matches.length === 0) {
         matchesContainer.innerHTML = "<p>No live matches right now.</p>";
         return;
-      }
+    }})
 
       matches.forEach(match => {
         const home = match.teams.home;
@@ -46,4 +55,6 @@
     .catch(err => {
       console.error(err);
       document.getElementById('matches').innerHTML = "<p>Error fetching matches.</p>";
-    });
+    }}); 
+    
+    */
